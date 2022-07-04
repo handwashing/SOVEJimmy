@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeatScroller : MonoBehaviour
 {//떨어지는 arrow들을 관리하는 스크립트
     public float beatTempo;  //arrow가 얼마나 빨리 떨어질지를 관리
-    public bool hasStarted; //버튼을 누르면 arrow가 화면 아래로 떨어지도록...
+    public bool hasStarted; //버튼을 누르면 arrow가 화면 아래로 떨어지도록...(버튼이 눌렸나 체크하는 것)
 
     void Start()
     {//우리가 설정한 비트 템포가 무엇이든 여기에 사용되어야 함
@@ -18,17 +18,16 @@ public class BeatScroller : MonoBehaviour
     {
         //hasStarted가 되어있지 않다면...
         //상태가 없는지 확인하기
-        //어떤 버튼이 눌렸는지 확인하려면 예를 들어 입력을 할 때 실제로 아무 키나 입력하면 아무 키나 입력할 수 있다?
+        
         if(!hasStarted)
         {//버튼이 눌렸는지 체크하고 없다면
-            if(Input.anyKeyDown)
-            {//버튼이 눌려있다면 hasStarted상태인 것...
-                hasStarted = true; //변경이 시작된 것
+            if(Input.anyKeyDown) //입력을 할 때 아무 키나 입력하면 아무 키나 입력할 수 있다
+            {   
+                hasStarted = true; //버튼이 눌려있다면 hasStarted상태인 것...
             }
         }
-        else //그렇지 않다면 비트에 따라 바를 아래로 내리기 
-        //따라서 이 바가 움직이기 전에 비트는 일반적으로 매우 간단한 종류의
-        //표준에서 시간 척도와 평균 시간 척도로 작동하ㄴ다고 말한다...
+        else 
+        //그렇지 않다면 비트에 따라 바를 아래로 내리기 
         //비트는 약 1분에 120비트가 적용되는 템포임
         //-> 분당 120 비트를 얻으려면 60으로 나누면 초당 2비트가 된다
         //유니티에서 초당 비트를 원하면 화살키를 움직일 것-> 초당 두 곳으로 움직여
