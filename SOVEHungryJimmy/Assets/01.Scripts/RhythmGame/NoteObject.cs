@@ -8,6 +8,8 @@ public class NoteObject : MonoBehaviour
 
     public KeyCode keyToPress; //키 정보
 
+    public GameObject hitEffect, goodEffect, perfectEffect, missEffect; //일치하는 노트 효과 가져오기
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,26 @@ public class NoteObject : MonoBehaviour
             {
                 gameObject.SetActive(false); //true상태면 오브젝트가 옳은 위치에 있다는 것 /디폴트로 돌리는 것
 
-                RhythmGameManager.instance.NoteHit(); //RhythmGameManager에 있는 NoteHit함수를 가져다 쓴다
+                //RhythmGameManager.instance.NoteHit(); //RhythmGameManager에 있는 NoteHit함수를 가져다 쓴다
+            
+                if(Mathf.Abs(transform.position.y) > 0.25) //버튼의 y축에서 0.25이상일 때 Hit 처리가 되었다면...
+                {
+                    Debug.Log("Hit");
+                    RhythmGameManager.instance.NormalHit();
+                    Instantiate(hitEffect,transform.position, hitEffect.transform.rotation); //hitEffect의 포지션 값 => hitEffect의 rotation 값임
+                }
+                else if(Mathf.Abs(transform.position.y) > 0.05f)
+                {
+                    Debug.Log("Good");
+                    RhythmGameManager.instance.GoodHit();
+                    Instantiate(goodEffect,transform.position, goodEffect.transform.rotation); 
+                }
+                else
+                {
+                    Debug.Log("Perfect");
+                    RhythmGameManager.instance.PerfectHit();
+                    Instantiate(perfectEffect,transform.position, perfectEffect.transform.rotation); 
+                }
             }
         }
     }
@@ -44,6 +65,8 @@ public class NoteObject : MonoBehaviour
             canBePressed = false;
 
             RhythmGameManager.instance.NoteMissed();
+            Instantiate(missEffect,transform.position, missEffect.transform.rotation); 
+            
         }
     }
 }

@@ -15,6 +15,8 @@ public class RhythmGameManager : MonoBehaviour
 
     public int currentScore; //현재 점수
     public int scorePerNote = 100; //(한 노트 당) 추가 될 점수
+    public int scorePerGoodNote = 125; //(한 노트 당) 추가 될 점수(Good)
+    public int scorePerPerfectNote = 150; //(한 노트 당) 추가 될 점수(Perfect)
 
     //public int currentMultiplier; //현재 추가 점수
     //public int multiplierTracker; //연속해서 (정해진 개수의) 노트를 맞췄을 경우... 다음 레벨로(더 높은 점수) 이동할 때 (그 시점을 추적할 때 사용 -> 몇 개 기준?
@@ -68,11 +70,29 @@ public class RhythmGameManager : MonoBehaviour
         //     }
         // }
 
-        // multiText.text = "Multiplier: x" + currentMultiplier;
+        // 2:12 영상에서도! 주석 처리// multiText.text = "Multiplier: x" + currentMultiplier;
 
-        currentScore += scorePerNote; //노트 맞추기를 성공했을 경우 점수 추가
+        //2:12 영상에서쯤! 주석 처리//currentScore += scorePerNote; //노트 맞추기를 성공했을 경우 점수 추가
         //currentScore += scorePerNote * currentScore; //배속으로 돌렸을 때 그 점수에 추가 점수 단위를 곱해 / 더 높은 점수를 준다
         scoreText.text = "Score: " + currentScore; //(점수가 추가된) 현재 점수 표시
+    }
+
+    public void NormalHit()
+    {
+        currentScore += scorePerNote;
+        NoteHit();
+    }
+
+    public void GoodHit()
+    {
+        currentScore += scorePerGoodNote;
+        NoteHit();
+    }
+
+    public void PerfectHit()
+    {
+        currentScore += scorePerPerfectNote;
+        NoteHit();
     }
 
     public void NoteMissed()
